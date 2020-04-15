@@ -6,6 +6,12 @@ class Game
     protected $imagePath;
     protected $rating;
 
+    /**
+     * Sees if the game is recommended or not,
+     * depending on it's average score
+     * 
+     * @return ???
+     */
     public function isRecommended()
     {
         return $this->getAverageScore() >= 3;
