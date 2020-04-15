@@ -6,6 +6,11 @@ class Game
     protected $imagePath;
     protected $rating;
 
+    public function isRecommended()
+    {
+        return $this->getAverageScore() >= 3;
+    }
+
     public function getTitle()
     {
         return $this->title;
