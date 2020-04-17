@@ -18,13 +18,14 @@ class GameTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('/images/game.jpg', $game->getImagePath());
     }
 
-    public function testIsRecommended_With5_ReturnsTrue()
-    {
-        $game = $this->getMock('Game', ['getAverageScore']);
-        $game->method('getAverageScore')
-             ->willReturn(5);
-        $this->assertTrue($game->isRecommended());
-    }
+    // This test no longer serves any porpuse because of isRecommended change of behaviour
+    // public function testIsRecommended_With5_ReturnsTrue()
+    // {
+    //     $game = $this->getMock('Game', ['getAverageScore']);
+    //     $game->method('getAverageScore')
+    //          ->willReturn(5);
+    //     $this->assertTrue($game->isRecommended());
+    // }
 
     public function testAverageScore_WithoutRatings_ReturnsNull()
     {
@@ -65,5 +66,31 @@ class GameTest extends PHPUnit_Framework_TestCase
              ->willReturn([$rating1, $rating2]);
 
         $this->assertEquals(5, $game->getAverageScore());
+    }
+
+    public function testIsRecommended_WithCompatibility2AndScore10_ReturnsFalse()
+    {
+        $game = $this->getMock('Game', ['getAverageScore', 'getGenreCode']);
+        $game->method('getAverageScore')
+             ->willReturn(10);
+
+        $user = $this->getMock('User', ['getGenreCompatibility']);
+        $game->method('getGenreCompatibility')
+            ->willReturn(2);
+
+        $this->assertFalse($game->isRecommended($user));
+    }
+
+    public function testIsRecommended_WithCompatibility10AndScore10_ReturnsFalse()
+    {
+        $game = $this->getMock('Game', ['getAverageScore', 'getGenreCode']);
+        $game->method('getAverageScore')
+             ->willReturn(10);
+
+        $user = $this->getMock('User', ['getGenreCompatibility']);
+        $game->method('getGenreCompatibility')
+            ->willReturn(10);
+
+        $this->assertTrue($game->isRecommended($user));
     }
 }

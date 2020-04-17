@@ -14,3 +14,18 @@ Ratings - The user can:
     - Write ONLY a review.
     - Write ONLY a score.
     - Write BOTH a review and a score.
+
+@@@@@@@@@@@@@@@@@@@@
+@ Writing new code @
+@@@@@@@@@@@@@@@@@@@@
+
+$game->isRecommended()
+            |
+            V
+$user->getGenreCompatibility($genreCode)
+
+Depending on the prefered genre, it will recommend games from that genre.
+
+###################################################################
+# ALL MOCK METHODS RETURN NULL BY DEFAULT, UNLESS TOLD OTHERWISE! #
+###################################################################
