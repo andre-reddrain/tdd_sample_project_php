@@ -1,0 +1,151 @@
+
+###
+<?php
+
+$cart = new ShoppingCart();
+$cart->items = [
+    [1, 12],
+    [2, 15],
+];
+$this->assertEquals(42, $cart->getTotal());
+###
+
+Advantanges:
+    - Pinpoint bugs
+    - Avoid breaking code
+    - Discover bugs before clients
+
+Permutations != Execution Paths
+
+Everytime a new condition is added, we are creating a new execution paths.
+The number of execution paths grows with each decision branch.
+
+Ex:
+###
+<?php
+
+$total = 0; # Fixes the bug of the skippable loop.
+
+foreach($products as $product) {
+    $total = $product->price * $product->quantity;
+}
+
+if ($total > 0) {
+    echo 'Something';
+}
+###
+
+In the example above:
+    - If the loop is skipped ($products null or 0), the if will try to access a undeclared variable -> Bug.
+    - "$total =" is written to test only one product. This is wrong!
+
+This test will run without concern,  if it's written:
+    - For 0 Products.
+    - For multiple Products (>= 1)
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@                   Precise assertions                   @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+$this->assertEquals(42, $cart->getTotal());
+
+$this->assertCount(2, $games);
+$this->assertCount(2, $games, 'Incorrect filtering');
+
+$this->assertFileExists('/images/profile/1.png', 'Pic uploaded');
+
+$this->assertJsonStringEqualsJsonString($expected, $apiResponse);
+
+$this->assertNotContains(5, $recommendedGameIds);
+
+$this->assertTrue($user->isEnabled());
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@                   Annotations                   @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+###
+/**
+ * @expectedException NotFoundException
+ */
+public function testGetInexistentGame()
+{
+    $repo = new GameRepository();
+    $repo->findGameById(999);
+}
+
+This test will expect an exception, in this case, NotFoundException.
+It will pass if that exception is thrown. Fails if not.
+###
+
+###
+/**
+ * @dataProvider ratingProvider
+ */
+public function testIsRecommended($rating, $expected)
+{
+    $game = new Game();
+    $game->setRating($rating);
+    $this->assertEquals($expected, $game->isRecommended());
+}
+
+This test uses a DataProvider to be run.
+
+public function ratingProvider()
+{
+    $data = [];
+    $data[] = [0.68, false];
+    $data[] = [0.70, true];
+    return $data;
+}
+
+DataProvider for the testIsRecommended.
+It will not be run as a test, so it wont interfere with the test run.
+
+###
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@                   Test Doubles                   @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+$game->isRecommended()
+        |
+        V
+$game->getAverageScore()
+        |
+        V
+$game->getRatings()
+
+Due to this logic, if we where to test the isRecommended() method,
+it could be very complicated to pinpoint a bug, due to the other methods it uses.
+For this, PHP's mocking framework does the trick.
+
+### Game.php
+(...)
+    public function isRecommended()
+    {
+        return $this->getAverageScore() >= 3;
+    }
+(...)
+###
+
+By using test doubles, there is no need to write the getAverageScore() method.
+
+### GameTest.php
+(...)
+    public function testIsRecommended_With5_ReturnsTrue()
+    {
+        $game = $this->getMock('Game', ['getAverageScore']);
+        $game->method('getAverageScore')
+            ->willReturn(5);
+        $this->assertTrue($game->isRecommended());
+    }
+(...)
+
+This mock will simulate the "getAverageScore", by returning 5.
+getAverageScore() does not exist in the project, but we mock it.
+
+Mocking is Useful:
+    - Simpler test setup.
+    - No ripple effect. -> Better pinpoint of the error's cause.
+    - Build in smaller increments.
