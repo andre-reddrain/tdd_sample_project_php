@@ -9,3 +9,8 @@ Effective Testing Cycle:
     - Execute test: fails
     - Fix code
     - Execute test: passes
+
+Ratings - The user can:
+    - Write ONLY a review.
+    - Write ONLY a score.
+    - Write BOTH a review and a score.

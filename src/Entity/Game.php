@@ -24,7 +24,12 @@ class Game
 
         $total = 0;
         foreach ($ratings as $rating) {
-            $total = $rating->getScore();   // BUG - It's assigning, not adding.
+            $score = $rating->getScore();
+            if ($score === null) {
+                $numRatings--;
+                continue;
+            }
+            $total += $score;
         }
         return $total / $numRatings;
     }
