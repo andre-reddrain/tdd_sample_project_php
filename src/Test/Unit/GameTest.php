@@ -22,7 +22,31 @@ class GameTest extends PHPUnit_Framework_TestCase
     {
         $game = $this->getMock('Game', ['getAverageScore']);
         $game->method('getAverageScore')
-            ->willReturn(5);
+             ->willReturn(5);
         $this->assertTrue($game->isRecommended());
+    }
+
+    public function testAverageScore_WithoutRatings_ReturnsNull()
+    {
+        $game = new Game();
+        $game->setRatings([]);
+        $this->assertNull($game->getAverageScore());
+    }
+
+    public function testAverageScore_With6And8_Returns7()
+    {
+        $rating1 = $this->getMock('Rating', ['getScore']);
+        $rating1->method('getScore')
+                ->willReturn(6);
+
+        $rating2 = $this->getMock('Rating', ['getScore']);
+        $rating2->method('getScore')
+                ->willReturn(8);
+
+        $game = $this->getMock('Game', ['getRatings']);
+        $game->method('getRatings')
+             ->willReturn([$rating1, $rating2]);
+
+        $this->assertEquals(7, $game->getAverageScore());
     }
 }

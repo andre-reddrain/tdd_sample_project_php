@@ -1,0 +1,11 @@
+Learning Steps:
+    - Found a bug - Write code when a new bug is found.
+    - Modifying code - Write tests when your code is going go be modified.
+    - Writing new code - Write tests while adding new code.
+    - TDD - Write tests before any code is written.
+
+Effective Testing Cycle:
+    - Don't fix the bug right away - Write a test for how the method should behave.
+    - Execute test: fails
+    - Fix code
+    - Execute test: passes
