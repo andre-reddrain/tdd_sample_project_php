@@ -29,3 +29,23 @@ Depending on the prefered genre, it will recommend games from that genre.
 ###################################################################
 # ALL MOCK METHODS RETURN NULL BY DEFAULT, UNLESS TOLD OTHERWISE! #
 ###################################################################
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ Test-driven Development @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+New logic:
+
+$game->isRecommended()
+        |
+        V
+$game->getGenreCode() -> Getter. No need to write a test (for now...)
+        |
+        V
+$user->getGenreCompatibility($genreCode)
+        |
+        V
+$user->findRatingsByGenre($genreCode)
+        |
+        V
+$user->getRatings()
