@@ -1,0 +1,17 @@
+{
+    "name": "legalvision/tdd_sample_project",
+    "description": "TDD Sample Project",
+    "require": {
+        "guzzlehttp/guzzle": "^6.5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.0",
+        "phpunit/php-code-coverage": "^7.0"
+    },
+    "authors": [
+        {
+            "name": "André Rosa",
+            "email": "andre.reddrain@gmail.com"
+        }
+    ]
+}
