@@ -7,3 +7,13 @@ HTTP: APIs and pages
 Legacy rewrite
 
 Recommended to HTTP Requests -> Guzzle
+
+Goutte -> Works well with Guzzle:
+    - Crawler -> Collects data from webpages
+    - Returns HTML and XML
+
+Things to test:
+    - Status code
+    - Content and count
+    - Database impact
+    - Filesystem impact

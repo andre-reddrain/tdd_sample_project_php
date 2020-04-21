@@ -12,7 +12,7 @@ $games = $repo->findByUserId(1);
     <li>
         <?php echo $game->getTitle() ?><br>
         <?php echo $game->getAverageScore() ?><br>
-        <img src="<?php echo $game->getImagePath() ?>">
+        <img src="<?php echo $game->getImagePath() ?>" style="max-width:100px; max-height:100px">
     </li>
 <?php endforeach ?>
 </ul>

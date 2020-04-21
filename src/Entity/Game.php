@@ -59,7 +59,7 @@ class Game
     public function getImagePath()
     {
         if ($this->imagePath == null) {
-            return '/images/placeholder.jpg';
+            return '/Projetos/tdd_sample_project/web/images/placeholder.jpg';
         }
         return $this->imagePath;
     }
