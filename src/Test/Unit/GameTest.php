@@ -1,8 +1,10 @@
 <?php
 
+use PHPUnit\Framework\TestCase;
+
 require __DIR__ . "/../../Entity/Game.php";
 
-class GameTest extends PHPUnit_Framework_TestCase
+class GameTest extends TestCase
 {
     public function testImage_WithNull_ReturnsPlaceHolder()
     {
@@ -36,15 +38,15 @@ class GameTest extends PHPUnit_Framework_TestCase
 
     public function testAverageScore_With6And8_Returns7()
     {
-        $rating1 = $this->getMock('Rating', ['getScore']);
+        $rating1 = $this->createMock('Rating', ['getScore']);
         $rating1->method('getScore')
                 ->willReturn(6);
 
-        $rating2 = $this->getMock('Rating', ['getScore']);
+        $rating2 = $this->createMock('Rating', ['getScore']);
         $rating2->method('getScore')
                 ->willReturn(8);
 
-        $game = $this->getMock('Game', ['getRatings']);
+        $game = $this->createMock('Game', ['getRatings']);
         $game->method('getRatings')
              ->willReturn([$rating1, $rating2]);
 
@@ -53,15 +55,15 @@ class GameTest extends PHPUnit_Framework_TestCase
 
     public function testAverageScore_WithNullAnd5_Returns5()
     {
-        $rating1 = $this->getMock('Rating', ['getScore']);
+        $rating1 = $this->createMock('Rating', ['getScore']);
         $rating1->method('getScore')
                 ->willReturn(null);
 
-        $rating2 = $this->getMock('Rating', ['getScore']);
+        $rating2 = $this->createMock('Rating', ['getScore']);
         $rating2->method('getScore')
                 ->willReturn(5);
 
-        $game = $this->getMock('Game', ['getRatings']);
+        $game = $this->createMock('Game', ['getRatings']);
         $game->method('getRatings')
              ->willReturn([$rating1, $rating2]);
 
@@ -70,11 +72,11 @@ class GameTest extends PHPUnit_Framework_TestCase
 
     public function testIsRecommended_WithCompatibility2AndScore10_ReturnsFalse()
     {
-        $game = $this->getMock('Game', ['getAverageScore', 'getGenreCode']);
+        $game = $this->createMock('Game', ['getAverageScore', 'getGenreCode']);
         $game->method('getAverageScore')
              ->willReturn(10);
 
-        $user = $this->getMock('User', ['getGenreCompatibility']);
+        $user = $this->createMock('User', ['getGenreCompatibility']);
         $game->method('getGenreCompatibility')
             ->willReturn(2);
 
@@ -83,11 +85,11 @@ class GameTest extends PHPUnit_Framework_TestCase
 
     public function testIsRecommended_WithCompatibility10AndScore10_ReturnsFalse()
     {
-        $game = $this->getMock('Game', ['getAverageScore', 'getGenreCode']);
+        $game = $this->createMock('Game', ['getAverageScore', 'getGenreCode']);
         $game->method('getAverageScore')
              ->willReturn(10);
 
-        $user = $this->getMock('User', ['getGenreCompatibility']);
+        $user = $this->createMock('User', ['getGenreCompatibility']);
         $game->method('getGenreCompatibility')
             ->willReturn(10);
 
