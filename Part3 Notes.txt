@@ -1,0 +1,9 @@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@                   Functional Tests                   @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Black box: Input / Output
+HTTP: APIs and pages
+Legacy rewrite
+
+Recommended to HTTP Requests -> Guzzle
