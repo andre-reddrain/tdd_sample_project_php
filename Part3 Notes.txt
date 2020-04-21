@@ -17,3 +17,29 @@ Things to test:
     - Content and count
     - Database impact
     - Filesystem impact
+
+Database Structure:
+    Game        User
+       - Rating -
+
+SQL:
+
+create table game (
+    id int(10) unsigned auto_increment,
+    title varchar(50),
+    image_path varchar(255),
+    primary key (id) 
+);
+
+create table user (
+    id int(10) unsigned auto_increment,
+    username varchar(50),
+    primary key (id)
+);
+
+create table rating (
+    user_id int(10) unsigned,
+    game_id int(10) unsigned,
+    score tinyint(1),
+    primary key (user_id, game_id)
+);
