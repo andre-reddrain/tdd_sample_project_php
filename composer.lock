@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "639b0fdffc57be26106d9d33b7e5ed0d",
+    "content-hash": "1519ce115158c68dca27ffff73a099bb",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -1273,6 +1273,80 @@
                 "xunit"
             ],
             "time": "2020-03-31T08:52:04+00:00"
+        },
+        {
+            "name": "phpunit/phpunit-selenium",
+            "version": "8.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/giorgiosironi/phpunit-selenium.git",
+                "reference": "7c8bef67f1e206044bbb8e873402c696611ada43"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/giorgiosironi/phpunit-selenium/zipball/7c8bef67f1e206044bbb8e873402c696611ada43",
+                "reference": "7c8bef67f1e206044bbb8e873402c696611ada43",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=7.2",
+                "phpunit/phpunit": ">=8.0,<9.0"
+            },
+            "require-dev": {
+                "phing/phing": "2.*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "PHPUnit/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "include-path": [
+                ""
+            ],
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Giorgio Sironi",
+                    "email": "info@giorgiosironi.com",
+                    "role": "developer"
+                },
+                {
+                    "name": "Ivan Kurnosov",
+                    "email": "zerkms@zerkms.com",
+                    "role": "developer"
+                },
+                {
+                    "name": "Paul Briton",
+                    "role": "developer"
+                },
+                {
+                    "name": "Patrik Štrba",
+                    "role": "developer"
+                },
+                {
+                    "name": "Petr Kotek",
+                    "role": "developer"
+                },
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sb@sebastian-bergmann.de",
+                    "role": "original developer"
+                }
+            ],
+            "description": "Selenium Server integration for PHPUnit",
+            "homepage": "https://github.com/giorgiosironi/phpunit-selenium",
+            "keywords": [
+                "phpunit",
+                "selenium",
+                "testing",
+                "xunit"
+            ],
+            "time": "2020-03-17T13:40:40+00:00"
         },
         {
             "name": "psr/container",
