@@ -47,3 +47,22 @@ create table rating (
 APIs
 
 Receive Request -> Decode JSON -> Process -> Encode JSON -> Send response
+
+Tools to write tests:
+    - Fixtures : Your system will not move while you are testing:
+        - Database snapshot
+        - Restore for each functional test
+        - Create test database
+    - Frontend / Backend
+        - Parallel Works
+        - Clear expectations
+        - Contract
+    - Legacy
+        - Progressive refactoring:
+            Functional test -> New page
+                    |
+                    V
+              Existing page
+        - Rewriting to another language
+        - Functional testing: Request and Response
+        - Database, files, e-mails, etc...
