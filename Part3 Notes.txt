@@ -43,3 +43,7 @@ create table rating (
     score tinyint(1),
     primary key (user_id, game_id)
 );
+
+APIs
+
+Receive Request -> Decode JSON -> Process -> Encode JSON -> Send response

@@ -34,6 +34,19 @@ class Game
         return $total / $numRatings;
     }
 
+    public function toArray()
+    {
+        $array = [
+            'title' => $this->getTitle(),
+            'imagePath' => $this->getImagePath(),
+            'ratings' => [],
+        ];
+        foreach ($this->getRatings() as $rating) {
+            $array['ratings'][] = $rating->toArray();
+        }
+        return $array;
+    }
+
     /**
      * Sees if the game is recommended or not,
      * depending on it's average score

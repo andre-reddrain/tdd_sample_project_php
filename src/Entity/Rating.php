@@ -6,6 +6,13 @@ class Rating
     protected $user;
     protected $score;
 
+    public function toArray()
+    {
+        return [
+            'score' => $this->getScore(),
+        ];
+    }
+
     public function getGame()
     {
         return $this->game;

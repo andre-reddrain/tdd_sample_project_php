@@ -14,6 +14,21 @@ class GameControllerTest extends TestCase
         $this->assertCount(6, $response->filter('ul > li'));
     }
 
+    public function testApiGames_WithUser_Returns6Items()
+    {
+        $client = new \GuzzleHttp\Client();
+        $response = $client->request('GET', 'http://localhost/Projetos/tdd_sample_project/web/api-games.php', [
+            'json' => [
+                'user' => '1',
+            ],
+        ]);
+
+        $json = $response->getBody()->getContents();
+        $this->assertJsonStringEqualsJsonString(
+            file_get_contents(__DIR__ . '/api-games-user.json'), $json
+        );
+    }
+
     public function testAddRating_WithGet_HasEmptyForm()
     {
         $client = new Client();
