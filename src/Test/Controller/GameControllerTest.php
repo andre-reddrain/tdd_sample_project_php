@@ -34,13 +34,20 @@ class GameControllerTest extends TestCase
             'http://localhost/Projetos/tdd_sample_project/web/add-rating.php?game=1',
             [
                 'allow_redirects' => false,
-                'form_params' => [
-                    'score' => '5'
-                ],
+                'multipart' => [
+                    [
+                        'name' => 'score',
+                        'contents' => '5',
+                    ],
+                    [
+                        'name' => 'screenshot',
+                        'contents' => fopen(__DIR__ . '/screenshot.jpg', 'r')
+                    ]
+                ]
             ]
         );
         $this->assertEquals(302, $response->getStatusCode());
-        $this->assertEquals('/', $response->getHeaderLine('Location'));
+        $this->assertEquals('/Projetos/tdd_sample_project/web/', $response->getHeaderLine('Location'));
 
         $dsn = "mysql:host=127.0.0.1;dbname=gamebook_test;port=3306";
         $user = "root";
@@ -60,5 +67,7 @@ class GameControllerTest extends TestCase
                 'score' => '5',
             ], $result[0]
         );
+
+        $this->assertFileExists(dirname(__DIR__, 3) . '/web/screenshots/1-1.jpg');
     }
 }
