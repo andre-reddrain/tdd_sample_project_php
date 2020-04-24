@@ -11,8 +11,8 @@ $games = $repo->findByUserId(1);
 <?php foreach ($games as $game) : ?>
     <li>
         <?php echo $game->getTitle() ?><br>
-        <?php echo $game->getRating() ?><br>
-        <img src="<?php echo $game->getImagePath() ?>">
+        <?php echo $game->getAverageScore() ?><br>
+        <img src="<?php echo $game->getImagePath() ?>" style="max-width:100px; max-height:100px">
     </li>
 <?php endforeach ?>
 </ul>

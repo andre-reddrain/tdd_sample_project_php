@@ -1,0 +1,68 @@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@                   Functional Tests                   @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Black box: Input / Output
+HTTP: APIs and pages
+Legacy rewrite
+
+Recommended to HTTP Requests -> Guzzle
+
+Goutte -> Works well with Guzzle:
+    - Crawler -> Collects data from webpages
+    - Returns HTML and XML
+
+Things to test:
+    - Status code
+    - Content and count
+    - Database impact
+    - Filesystem impact
+
+Database Structure:
+    Game        User
+       - Rating -
+
+SQL:
+
+create table game (
+    id int(10) unsigned auto_increment,
+    title varchar(50),
+    image_path varchar(255),
+    primary key (id) 
+);
+
+create table user (
+    id int(10) unsigned auto_increment,
+    username varchar(50),
+    primary key (id)
+);
+
+create table rating (
+    user_id int(10) unsigned,
+    game_id int(10) unsigned,
+    score tinyint(1),
+    primary key (user_id, game_id)
+);
+
+APIs
+
+Receive Request -> Decode JSON -> Process -> Encode JSON -> Send response
+
+Tools to write tests:
+    - Fixtures : Your system will not move while you are testing:
+        - Database snapshot
+        - Restore for each functional test
+        - Create test database
+    - Frontend / Backend
+        - Parallel Works
+        - Clear expectations
+        - Contract
+    - Legacy
+        - Progressive refactoring:
+            Functional test -> New page
+                    |
+                    V
+              Existing page
+        - Rewriting to another language
+        - Functional testing: Request and Response
+        - Database, files, e-mails, etc...

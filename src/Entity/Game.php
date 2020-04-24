@@ -34,6 +34,19 @@ class Game
         return $total / $numRatings;
     }
 
+    public function toArray()
+    {
+        $array = [
+            'title' => $this->getTitle(),
+            'imagePath' => $this->getImagePath(),
+            'ratings' => [],
+        ];
+        foreach ($this->getRatings() as $rating) {
+            $array['ratings'][] = $rating->toArray();
+        }
+        return $array;
+    }
+
     /**
      * Sees if the game is recommended or not,
      * depending on it's average score
@@ -59,7 +72,7 @@ class Game
     public function getImagePath()
     {
         if ($this->imagePath == null) {
-            return '/images/placeholder.jpg';
+            return '/Projetos/tdd_sample_project/web/images/placeholder.jpg';
         }
         return $this->imagePath;
     }
