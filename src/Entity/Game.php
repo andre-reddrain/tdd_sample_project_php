@@ -4,7 +4,35 @@ class Game
 {
     protected $title;
     protected $imagePath;
-    protected $rating;
+    protected $ratings;
+
+    /**
+     * Gets the average score of the game.
+     *
+     * @return int Average Score
+     */
+    public function getAverageScore()
+    {
+        $ratings = $this->getRatings();
+        $numRatings = count($ratings);
+
+        // Implemented after test fail (Divided by zero).
+        // This bug happened because $numRatings = 0
+        if ($numRatings == 0) {
+            return null;
+        }
+
+        $total = 0;
+        foreach ($ratings as $rating) {
+            $score = $rating->getScore();
+            if ($score === null) {
+                $numRatings--;
+                continue;
+            }
+            $total += $score;
+        }
+        return $total / $numRatings;
+    }
 
     /**
      * Sees if the game is recommended or not,
@@ -12,9 +40,10 @@ class Game
      * 
      * @return ???
      */
-    public function isRecommended()
+    public function isRecommended($user)
     {
-        return $this->getAverageScore() >= 3;
+        $compatibility = $user->getGenreCompatibility($this->getGenreCode());
+        return $this->getAverageScore() / 10 * $compatibility >= 3;
     }
 
     public function getTitle()
@@ -40,13 +69,13 @@ class Game
         $this->imagePath = $value;
     }
 
-    public function getRating()
+    public function getRatings()
     {
-        return $this->rating;
+        return $this->ratings;
     }
 
-    public function setRating($value)
+    public function setRatings($value)
     {
-        $this->rating = $value;
+        $this->ratings = $value;
     }
 }

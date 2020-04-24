@@ -1,0 +1,51 @@
+Learning Steps:
+    - Found a bug - Write code when a new bug is found.
+    - Modifying code - Write tests when your code is going go be modified.
+    - Writing new code - Write tests while adding new code.
+    - TDD - Write tests before any code is written.
+
+Effective Testing Cycle:
+    - Don't fix the bug right away - Write a test for how the method should behave.
+    - Execute test: fails
+    - Fix code
+    - Execute test: passes
+
+Ratings - The user can:
+    - Write ONLY a review.
+    - Write ONLY a score.
+    - Write BOTH a review and a score.
+
+@@@@@@@@@@@@@@@@@@@@
+@ Writing new code @
+@@@@@@@@@@@@@@@@@@@@
+
+$game->isRecommended()
+            |
+            V
+$user->getGenreCompatibility($genreCode)
+
+Depending on the prefered genre, it will recommend games from that genre.
+
+###################################################################
+# ALL MOCK METHODS RETURN NULL BY DEFAULT, UNLESS TOLD OTHERWISE! #
+###################################################################
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ Test-driven Development @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+New logic:
+
+$game->isRecommended()
+        |
+        V
+$game->getGenreCode() -> Getter. No need to write a test (for now...)
+        |
+        V
+$user->getGenreCompatibility($genreCode)
+        |
+        V
+$user->findRatingsByGenre($genreCode)
+        |
+        V
+$user->getRatings()
