@@ -10,7 +10,7 @@ class RatingSubmissionTest extends Selenium2TestCase
         $this->setPort(4444);
         $this->setBrowserUrl('http://localhost/Projetos/tdd_sample_project/web/');
         $this->setBrowser('chrome');
-        // $this->setDesiredCapabilities(['chromeOptions' => ['w3c' => false]]); 
+        $this->setDesiredCapabilities(['chromeOptions' => ['w3c' => false]]); 
     }
 
     public function tearDown(): void
@@ -36,5 +36,8 @@ class RatingSubmissionTest extends Selenium2TestCase
         $form->submit();
 
         $this->assertEquals('http://localhost/Projetos/tdd_sample_project/web/', $this->getBrowserUrl());
+
+        $image = $this->currentScreenshot();
+        file_put_contents(dirname(__DIR__, 3) . '/web/screenshots/submit-rating.jpg', $image);
     }
 }
