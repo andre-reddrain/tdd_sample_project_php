@@ -1,0 +1,6 @@
+Course concepts:
+    - Unit testing
+    - PHPUnit
+    - Environment
+    - Create & execute tests
+    - Techniques
