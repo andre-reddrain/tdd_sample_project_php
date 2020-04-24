@@ -1,0 +1,5 @@
+Why Selenium?
+    - Automates browsers
+    - Simulate User Interaction
+    - Test in multiple browsers
+    - Test complete scenarios (end-to-end)
