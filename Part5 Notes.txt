@@ -1,0 +1,6 @@
+fswatch: https://github.com/emcrisostomo/fswatch
+    - Watches the filesystem
+    - Executes custom scripts
+    - All platforms
+
+to watch: fswatch -o src | xargs -n1 '.bin/autotest.sh'

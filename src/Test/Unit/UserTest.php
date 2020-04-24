@@ -2,8 +2,6 @@
 
 use PHPUnit\Framework\TestCase;
 
-require __DIR__ . "/../../Entity/User.php";
-
 class UserTest extends TestCase
 {
     public function testGenreCompatibility_With8And6_Returns7()
