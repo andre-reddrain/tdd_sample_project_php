@@ -21,7 +21,20 @@ class RatingSubmissionTest extends Selenium2TestCase
     public function testHomePage()
     {
         $this->url('/');
-        $content = $this->byTag('li')->text();
-        $this->assertEquals("Game 1\n4.5", $content);
+        $content = $this->byCssSelector('li span.title')->text();
+        $this->assertEquals("Game 1", $content);
+    }
+
+    public function testSubmitRating()
+    {
+        $this->timeouts()->implicitWait(2000);
+        $this->url('/');
+        $this->byLinkText('Rate')->click();
+
+        $form = $this->byTag('form');
+        $form->byName('score')->value(5);
+        $form->submit();
+
+        $this->assertEquals('http://localhost/Projetos/tdd_sample_project/web/', $this->getBrowserUrl());
     }
 }

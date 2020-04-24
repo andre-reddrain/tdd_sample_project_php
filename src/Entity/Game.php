@@ -2,9 +2,20 @@
 
 class Game
 {
+    protected $id;
     protected $title;
     protected $imagePath;
     protected $ratings;
+
+    public function __construct($id = null)
+    {
+        $this->id = $id;
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * Gets the average score of the game.
