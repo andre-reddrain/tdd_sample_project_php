@@ -5,9 +5,12 @@ use Goutte\Client;
 
 class GameControllerTest extends TestCase
 {
-    protected $pdo;
+    public function setUp()
+    {
+        exec("mysql -u'root' --password='root' < " . __DIR__ . "/../fixture.sql");
+    }
 
-    public function testIndex_HasTitle()
+    public function testIndex_HasUl()
     {
         $client = new Client();
         $response = $client->request('GET', 'http://localhost/Projetos/tdd_sample_project/web/');
