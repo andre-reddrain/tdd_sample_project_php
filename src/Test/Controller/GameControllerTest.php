@@ -5,7 +5,7 @@ use Goutte\Client;
 
 class GameControllerTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         exec("mysql -u'root' --password='root' < " . __DIR__ . "/../fixture.sql");
     }
