@@ -18,15 +18,6 @@ class GameTest extends TestCase
         $this->assertEquals('/images/game.jpg', $game->getImagePath());
     }
 
-    // This test no longer serves any porpuse because of isRecommended change of behaviour
-    // public function testIsRecommended_With5_ReturnsTrue()
-    // {
-    //     $game = $this->getMock('Game', ['getAverageScore']);
-    //     $game->method('getAverageScore')
-    //          ->willReturn(5);
-    //     $this->assertTrue($game->isRecommended());
-    // }
-
     public function testAverageScore_WithoutRatings_ReturnsNull()
     {
         $game = new Game();
@@ -37,23 +28,23 @@ class GameTest extends TestCase
     public function testAverageScore_With6And8_Returns7()
     {
         $rating1 = $this->getMockBuilder(Rating::class)
-             ->setMethods(['getScore'])
-             ->getMock();
-         $rating1->method('getScore')->willReturn(6);
- 
-         $rating2 = $this->getMockBuilder(Rating::class)
-             ->setMethods(['getScore'])
-             ->getMock();
-         $rating2->method('getScore')->willReturn(8);
- 
-         $game = $this->getMockBuilder(Game::class)
-             ->setMethodsExcept(['getAverageScore'])
-             ->getMock();
-         $game->method('getRatings')->willReturn([$rating1, $rating2]);
- 
-         $result = $game->getAverageScore();
- 
-         $this->assertEquals(7, $result);
+            ->setMethods(['getScore'])
+            ->getMock();
+        $rating1->method('getScore')->willReturn(6);
+
+        $rating2 = $this->getMockBuilder(Rating::class)
+            ->setMethods(['getScore'])
+            ->getMock();
+        $rating2->method('getScore')->willReturn(8);
+
+        $game = $this->getMockBuilder(Game::class)
+            ->setMethodsExcept(['getAverageScore'])
+            ->getMock();
+        $game->method('getRatings')->willReturn([$rating1, $rating2]);
+
+        $result = $game->getAverageScore();
+
+        $this->assertEquals(7, $result);
     }
 
     public function testAverageScore_WithNullAnd5_Returns5()
@@ -93,14 +84,6 @@ class GameTest extends TestCase
 
     public function testIsRecommended_WithCompatibility10AndScore10_ReturnsFalse()
     {
-        // $game = $this->createMock('Game', ['getAverageScore', 'getGenreCode']);
-        // $game->method('getAverageScore')
-        //      ->willReturn(10);
-
-        // $user = $this->createMock('User', ['getGenreCompatibility']);
-        // $user->method('getGenreCompatibility')
-        //     ->willReturn(10);
-
         $game = $this->getMockBuilder(Game::class)
             ->setMethodsExcept(['isRecommended'])
             ->getMock();
