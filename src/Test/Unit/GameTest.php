@@ -8,7 +8,7 @@ class GameTest extends TestCase
     {
         $game = new Game();
         $game->setImagePath(null);
-        $this->assertEquals('/images/placeholder.jpg', $game->getImagePath());
+        $this->assertEquals('/Projetos/tdd_sample_project/web/images/placeholder.jpg', $game->getImagePath());
     }
 
     public function testImage_WithPath_ReturnsPath()
@@ -17,15 +17,6 @@ class GameTest extends TestCase
         $game->setImagePath('/images/game.jpg');
         $this->assertEquals('/images/game.jpg', $game->getImagePath());
     }
-
-    // This test no longer serves any porpuse because of isRecommended change of behaviour
-    // public function testIsRecommended_With5_ReturnsTrue()
-    // {
-    //     $game = $this->getMock('Game', ['getAverageScore']);
-    //     $game->method('getAverageScore')
-    //          ->willReturn(5);
-    //     $this->assertTrue($game->isRecommended());
-    // }
 
     public function testAverageScore_WithoutRatings_ReturnsNull()
     {
@@ -36,36 +27,46 @@ class GameTest extends TestCase
 
     public function testAverageScore_With6And8_Returns7()
     {
-        $rating1 = $this->createMock('Rating', ['getScore']);
-        $rating1->method('getScore')
-                ->willReturn(6);
+        $rating1 = $this->getMockBuilder(Rating::class)
+            ->setMethods(['getScore'])
+            ->getMock();
+        $rating1->method('getScore')->willReturn(6);
 
-        $rating2 = $this->createMock('Rating', ['getScore']);
-        $rating2->method('getScore')
-                ->willReturn(8);
+        $rating2 = $this->getMockBuilder(Rating::class)
+            ->setMethods(['getScore'])
+            ->getMock();
+        $rating2->method('getScore')->willReturn(8);
 
-        $game = $this->createMock('Game', ['getRatings']);
-        $game->method('getRatings')
-             ->willReturn([$rating1, $rating2]);
+        $game = $this->getMockBuilder(Game::class)
+            ->setMethodsExcept(['getAverageScore'])
+            ->getMock();
+        $game->method('getRatings')->willReturn([$rating1, $rating2]);
 
-        $this->assertEquals(7, $game->getAverageScore());
+        $result = $game->getAverageScore();
+
+        $this->assertEquals(7, $result);
     }
 
     public function testAverageScore_WithNullAnd5_Returns5()
     {
-        $rating1 = $this->createMock('Rating', ['getScore']);
-        $rating1->method('getScore')
-                ->willReturn(null);
+        $rating1 = $this->getMockBuilder(Rating::class)
+            ->setMethods(['getScore'])
+            ->getMock();
+        $rating1->method('getScore')->willReturn(null);
 
-        $rating2 = $this->createMock('Rating', ['getScore']);
-        $rating2->method('getScore')
-                ->willReturn(5);
+        $rating2 = $this->getMockBuilder(Rating::class)
+            ->setMethods(['getScore'])
+            ->getMock();
+        $rating2->method('getScore')->willReturn(5);
 
-        $game = $this->createMock('Game', ['getRatings']);
-        $game->method('getRatings')
-             ->willReturn([$rating1, $rating2]);
+        $game = $this->getMockBuilder(Game::class)
+            ->setMethodsExcept(['getAverageScore'])
+            ->getMock();
+        $game->method('getRatings')->willReturn([$rating1, $rating2]);
 
-        $this->assertEquals(5, $game->getAverageScore());
+        $result = $game->getAverageScore();
+
+        $this->assertEquals(5, $result);
     }
 
     public function testIsRecommended_WithCompatibility2AndScore10_ReturnsFalse()
@@ -83,14 +84,18 @@ class GameTest extends TestCase
 
     public function testIsRecommended_WithCompatibility10AndScore10_ReturnsFalse()
     {
-        $game = $this->createMock('Game', ['getAverageScore', 'getGenreCode']);
-        $game->method('getAverageScore')
-             ->willReturn(10);
+        $game = $this->getMockBuilder(Game::class)
+            ->setMethodsExcept(['isRecommended'])
+            ->getMock();
+        $game->method('getAverageScore')->willReturn(10);
 
-        $user = $this->createMock('User', ['getGenreCompatibility']);
-        $game->method('getGenreCompatibility')
-            ->willReturn(10);
+        $user = $this->getMockBuilder(User::class)
+            ->setMethods(null)
+            ->getMock();
+        $user->method('getGenreCompatibility')->willReturn(10);
 
-        $this->assertTrue($game->isRecommended($user));
+        $result = $game->isRecommended($user);
+
+        $this->assertTrue($result);
     }
 }
