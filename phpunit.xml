@@ -26,10 +26,6 @@
             <exclude>
                 <directory suffix=".php">src/Test</directory>
             </exclude>
-            <directory suffix=".php">web</directory>
-            <exclude>
-                <directory>web/coverage</directory>
-            </exclude>
         </whitelist>
     </filter>
 </phpunit>
